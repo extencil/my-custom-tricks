@@ -38,7 +38,7 @@ ubuntu@p-ubnt-srv01:~$ ip a
 
 Edit rt_tables file:
 ```console
-root@p-ubnt-srv01:~$ echo '200     wifiout' >> /etc/iproute2/rt_tables
+root@p-ubnt-srv01:~# nano /etc/iproute2/rt_tables
 ```
 
 Add this line to the end of file:
@@ -48,29 +48,29 @@ Add this line to the end of file:
 
 #### Add a custom route for all traffic originating from wlp2s0 to use the Wi-Fi gateway
 ```console
-root@p-ubnt-srv01:~$ ip route add default via 10.0.0.1 dev wlp2s0 table wifiout
+root@p-ubnt-srv01:~# ip route add default via 10.0.0.1 dev wlp2s0 table wifiout
 ```
 
 #### Add a policy routing rule to apply the new table when using IP 10.0.0.120
 ```console
-root@p-ubnt-srv01:~$ ip rule add from 10.0.0.120 table wifiout
+root@p-ubnt-srv01:~# ip rule add from 10.0.0.120 table wifiout
 ```
 
 #### Apply NAT (Masquerade) for Outbound Traffic via Wi-Fi
 ```console
-root@p-ubnt-srv01:~$ iptables -t nat -A POSTROUTING -s 10.0.0.120 -o wlp2s0 -j MASQUERADE
+root@p-ubnt-srv01:~# iptables -t nat -A POSTROUTING -s 10.0.0.120 -o wlp2s0 -j MASQUERADE
 ```
 
 #### Test the Outbound Connection Using the Source IP
 ```console
-root@p-ubnt-srv01:~$ curl --interface 10.0.0.120 http://api.ipify.org
+root@p-ubnt-srv01:~# curl --interface 10.0.0.120 http://api.ipify.org
 ```
 
 #### Squid Proxy Configuration:
 
 Edit the Squid configuration file:
 ```console
-root@p-ubnt-srv01:~$ sudo nano /etc/squid/squid.conf
+root@p-ubnt-srv01:# sudo nano /etc/squid/squid.conf
 ```
 
 Add or modify these lines:
@@ -82,10 +82,10 @@ tcp_outgoing_address 10.0.0.120
 
 #### Restart Squid to Apply Changes
 ```console
-root@p-ubnt-srv01:~$ sudo systemctl restart squid
+root@p-ubnt-srv01:~# sudo systemctl restart squid
 ```
 
 #### Confirm Proxy Behavior from a Client Machine
 ```console
-root@p-ubnt-srv01:~$ curl -x http://<proxy-ip>:3128 http://api.ipify.org
+root@p-ubnt-srv01:~# curl -x http://<proxy-ip>:3128 http://api.ipify.org
 ```
