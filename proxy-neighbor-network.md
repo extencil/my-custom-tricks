@@ -1,6 +1,6 @@
 # neighbor's network via proxy
 ### Context
-My neighbor has a vulnerable wireless network and I have a test device sitting here in my room. It's an old Lenovo laptop running Ubuntu 24.04.1 LTS. I want to use their network as my exit node.
+My neighbor has a vulnerable wireless network and I have a test device sitting here in my room. It's an old Lenovo laptop running Ubuntu 24.04.1 LTS. This laptop is connected to my "access point/router" trough an UTP cable. I want to use their network as my exit node.
 
 For this, i will use squid proxy.
 
