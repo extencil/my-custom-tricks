@@ -1,0 +1,27 @@
+#!/usr/bin/expect -f
+#   Disclaimer
+#       I do not recommend the use of this script because of the hardcoded secrets. It's just a trick, an idea.
+#       Can you improve that sh1t? Feel free to open an Pull Request, i'd love to read your recommendations.
+#
+set ssh_user "root"
+set ssh_pass "segfault"
+set sf_host "segfault.net"
+#set sf_secret "<SECRET>"
+set sf_secret ""
+
+match_max 100000
+
+if { $sf_secret eq "" } {
+    spawn ssh $ssh_user@$sf_host
+} else {
+    spawn ssh -o "SetEnv SECRET=$sf_secret" $ssh_user@$sf_host
+}
+
+expect "*?assword:*"
+send -- "$ssh_pass\r"
+send -- "\r"
+expect "*?#*"
+send -- "clear\r"
+expect "*?#*"
+send -- "# Greetz from extencil@proton.thc.org\r"
+interact
