@@ -1,5 +1,10 @@
 # my-custom-tricks
-i just want to store the tricks that i like. i dont care about what you gonna do with all of these shits
+I created this repository to store some codes and tricks that i like. You can review, audit, sugest, use and distribute all of the material here, with or without my consent.
+
+This content is not, in addition to being discouraged, and should not be used for criminal, illicit or unethical activities.
+
+## Can i use the tools here for XYZ?
+For sure, use it, share it, change some code and open an Pull Request to merge with this repository. I just ask you to never link your bad actions to my profile. 
 
 list:
 - [nord-ssh](https://github.com/extencil/my-custom-tricks/blob/main/nord-ssh.bash): Utility to check if you are connected to NordVPN before proceeding with ssh connections. This shit allows you to abort before connecting or to connect to NordVPN if you are not connected.
